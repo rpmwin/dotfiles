@@ -1,134 +1,82 @@
-# Tools Reference
+# Tools
 
-Every tool installed by the Brewfile and why it's here.
+Every tool in the Brewfile and what it does.
 
----
+## Shell
 
-## Shell & Prompt
+- **zsh** — your shell
+- **oh-my-posh** — prompt theme (shows git branch, exit codes, etc.)
+- **fzf** — fuzzy finder. `Ctrl+R` searches history, `Ctrl+T` finds files, `Alt+C` jumps to directories
+- **zoxide** — smart cd. Type `z projname` instead of full paths. It learns from your usage
+- **direnv** — auto-loads `.envrc` when you cd into a directory
+- **atuin** — better shell history search, syncs across machines
+- **zsh-autosuggestions** — grey ghost text as you type, press right arrow to accept
+- **zsh-syntax-highlighting** — colors commands as you type (red = invalid, green = valid)
 
-| Tool | What It Does | How You Use It |
-|------|-------------|----------------|
-| **zsh** | Your shell. Better than bash for interactive use — better tab completion, plugins, scripting. | It's your default shell. |
-| **oh-my-posh** | Prompt theme engine. Shows git branch, exit codes, execution time in your prompt. | Loads automatically via `plugins.zsh`. Theme: Catppuccin Mocha. |
-| **fzf** | Fuzzy finder. Search anything by typing partial matches. | `Ctrl+R` = search history. `Ctrl+T` = find files. `Alt+C` = cd into directories. |
-| **zoxide** | Smart `cd`. Remembers directories you visit. | Type `z projname` instead of `cd ~/Developer/some/long/path/projname`. It learns. |
-| **direnv** | Auto-loads `.envrc` files when you enter a directory. | Put `export AWS_PROFILE=dev` in a project's `.envrc`. It activates when you `cd` in, deactivates when you leave. |
-| **atuin** | Shell history sync + search. Better than default history. | `Ctrl+R` opens atuin search (replaces default). History syncs across machines. |
-| **zsh-autosuggestions** | Ghost text suggestions as you type, based on history. | Start typing a command → see grey suggestion → press `→` to accept. |
-| **zsh-syntax-highlighting** | Colors your commands as you type. Red = invalid, green = valid. | Just type commands. Wrong command names turn red before you hit enter. |
+## Modern replacements for old tools
 
----
+- **bat** replaces `cat` — syntax highlighting, line numbers. Aliased so `cat` runs bat
+- **eza** replaces `ls` — icons, colors, git status. Aliased so `ls` runs eza
+- **fd** replaces `find` — simpler syntax, faster, respects .gitignore
+- **ripgrep (rg)** replaces `grep` — way faster, respects .gitignore
+- **delta** replaces `diff` — side-by-side diffs with syntax highlighting. Used automatically by git
+- **btop** replaces `top` — beautiful system monitor. Aliased so `top` runs btop
 
-## Modern CLI Replacements
+## Git
 
-These replace old Unix tools with faster, prettier, more useful versions.
+- **lazygit** — terminal UI for git. Type `lz`. Visual staging, branching, rebasing
+- **gh** — GitHub CLI. `gh pr create`, `gh issue list`
+- **glab** — GitLab CLI
+- **gitleaks** — scans for leaked secrets. Runs automatically via pre-commit hook
+- **delta** — pretty git diffs. Configured in .gitconfig, works automatically
 
-| Old Tool | Replacement | Why It's Better |
-|----------|-------------|----------------|
-| `cat` | **bat** | Syntax highlighting, line numbers, git integration. Aliased: `cat` runs `bat`. |
-| `ls` | **eza** | Icons, colors, git status, tree view. Aliased: `ls` runs `eza`. |
-| `find` | **fd** | Simpler syntax, respects `.gitignore`, way faster. Use: `fd pattern`. |
-| `grep` | **ripgrep (rg)** | Faster, respects `.gitignore`, better defaults. Use: `rg pattern`. |
-| `diff` | **delta** | Side-by-side diffs with syntax highlighting. Auto-used by `git diff`. |
-| `top` | **btop** | Beautiful system monitor with mouse support. Aliased: `top` runs `btop`. |
-| `du` | **dust** | Visual disk usage with bar charts. |
-| `df` | **duf** | Prettier disk free output. |
+## Dev
 
----
+- **neovim** — text editor. `nv` or `vi`
+- **tmux** — terminal multiplexer. `t`, `ta <name>`, `tn <name>`
+- **mise** — language version manager (replaces nvm, pyenv, goenv). `mise use node@20`
+- **yazi** — terminal file manager. Type `y`
+- **uv** — fast Python package manager
+- **topgrade** — updates everything at once (brew, npm, pip, etc.)
 
-## Git Tools
+## DevOps
 
-| Tool | What It Does | How You Use It |
-|------|-------------|----------------|
-| **git** | Version control. You know this one. | `g s` = status, `g save "msg"` = add+commit+push. See aliases in `aliases.zsh`. |
-| **gh** | GitHub CLI. PRs, issues, repos from terminal. | `gh pr create`, `gh issue list`, `gh repo clone`. |
-| **glab** | GitLab CLI. Same as `gh` but for GitLab. | `glab mr create`, `glab issue list`. |
-| **lazygit** | Terminal UI for git. Visual staging, branching, rebasing. | Type `lz` (aliased). Navigate with keyboard. Way faster than typing git commands. |
-| **gitleaks** | Scans for secrets in git history. Catches API keys, passwords before they're pushed. | Runs automatically via pre-commit hook. Also: `gitleaks detect`. |
-| **delta** | Pretty git diffs. Side-by-side, syntax highlighted. | Configured in `.gitconfig`. Every `git diff` and `git log -p` uses it automatically. |
+- **kubectl** — k8s CLI. `k`, `kgp`, `kgs`, `kaf`
+- **k9s** — terminal UI for Kubernetes
+- **helm** — k8s package manager. `h`, `hi`, `hup`
+- **terraform** — infrastructure as code. `tf`, `tfi`, `tfp`, `tfa`
+- **argocd** — GitOps for Kubernetes
+- **kind** — local k8s clusters in Docker
+- **kubeseal** — encrypt k8s secrets for git
+- **sops** — encrypt files with KMS
+- **nmap** — network scanner
+- **mtr** — better traceroute
 
----
-
-## Dev Tools
-
-| Tool | What It Does | How You Use It |
-|------|-------------|----------------|
-| **neovim** | Text editor. Configured with kickstart.nvim + custom plugins. | `nv` or `vi` (aliased). |
-| **tmux** | Terminal multiplexer. Multiple panes/windows in one terminal. | `t` = tmux, `ta <name>` = attach session, `tn <name>` = new session. |
-| **mise** | Language version manager. One tool replaces nvm, pyenv, goenv. | `mise use node@20` in a project. Auto-switches versions per directory. |
-| **yazi** | Terminal file manager. Navigate, preview, open files. | Type `y` (aliased). Navigate with vim keys. |
-| **uv** | Fast Python package manager. Replaces pip for most things. | `uv pip install`, `uv venv`, `uv run`. |
-| **topgrade** | Updates everything at once: brew, npm, pip, etc. | Run `topgrade`. It finds and updates all package managers. |
-
----
-
-## DevOps Tools
-
-| Tool | What It Does |
-|------|-------------|
-| **kubectl** | Kubernetes CLI. Aliased: `k get pods`, `kgp`, `kgs`, etc. |
-| **k9s** | Terminal UI for Kubernetes. Like lazygit but for k8s. |
-| **helm** | Kubernetes package manager. `h`, `hi`, `hup` aliased. |
-| **terraform** | Infrastructure as code. `tf`, `tfi`, `tfp`, `tfa` aliased. |
-| **argocd** | GitOps continuous delivery for Kubernetes. |
-| **kind** | Run local Kubernetes clusters in Docker. For testing. |
-| **kubeseal** | Encrypt Kubernetes secrets for git storage. |
-| **sops** | Encrypt/decrypt files with AWS KMS, GCP KMS, etc. |
-| **nmap** | Network scanner. Port scanning, service detection. |
-| **mtr** | Better traceroute. Combines ping + traceroute. |
-
----
-
-## Aliases Cheat Sheet
-
-All aliases are in `zsh/.zsh/aliases.zsh`. Here are the most useful ones:
+## Most-used aliases
 
 ```
-# Navigation
 ..          cd ..
-...         cd ../..
 c           clear
-mkd         mkdir -p
-
-# Files
-cat         bat (with syntax highlighting)
+cat         bat
 ls          eza (with icons)
-ll          eza -la (detailed)
+ll          detailed listing
 tree        eza --tree
 
-# Git (most used)
-gs          git status -sb
+gs          git status
 ga          git add
-gaa         git add .
-gc "msg"    git commit -m "msg"
+gc "msg"    git commit -m
 gp          git push
 gpl         git pull
 gd          git diff
-gl          git log (graph)
 lz          lazygit
 
-# g() function (even shorter)
-g s         git status
-g a         git add .
-g c "msg"   git commit -m "msg"
-g p         git push
-g save "m"  git add . && commit && push
+g s         git status (even shorter)
+g save "m"  add + commit + push in one go
 
-# Docker
-d           docker
-dc          docker compose
-dps         docker ps
-dex         docker exec -it
-
-# Kubernetes
 k           kubectl
 kgp         kubectl get pods
-kgs         kubectl get svc
-kaf         kubectl apply -f
-
-# Terraform
+dc          docker compose
 tf          terraform
-tfi         terraform init
-tfp         terraform plan
-tfa         terraform apply
 ```
+
+All aliases are in `zsh/.zsh/aliases.zsh`.
