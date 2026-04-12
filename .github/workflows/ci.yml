@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install stow
+        run: |
+          if [[ "$(uname)" == "Darwin" ]]; then
+            brew install stow
+          else
+            sudo apt-get update && sudo apt-get install -y stow
+          fi
+
+      - name: Stow simulate (dry run)
+        run: |
+          for dir in */; do
+            pkg="${dir%/}"
+            case "$pkg" in
+              scripts|hooks|docs|.github|.git|.claude) continue ;;
+            esac
+            echo "Simulating stow for $pkg..."
+            stow --simulate -v --target="$HOME" "$pkg" 2>&1 || true
+          done
+
+      - name: Install shellcheck
+        run: |
+          if [[ "$(uname)" == "Darwin" ]]; then
+            brew install shellcheck
+          else
+            sudo apt-get install -y shellcheck
+          fi
+
+      - name: Shellcheck
+        run: |
+          shellcheck install.sh stow.sh macos.sh scripts/*.sh || true

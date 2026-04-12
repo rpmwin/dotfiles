@@ -1,0 +1,18 @@
+#!/bin/bash
+# Pre-commit hook: shellcheck + gitleaks
+# Activated via: git config core.hooksPath hooks/
+
+# Shellcheck — lint shell scripts
+if command -v shellcheck &>/dev/null; then
+  scripts=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(sh|bash)$')
+  if [[ -n "$scripts" ]]; then
+    echo "Running shellcheck..."
+    echo "$scripts" | xargs shellcheck || exit 1
+  fi
+fi
+
+# Gitleaks — scan for secrets
+if command -v gitleaks &>/dev/null; then
+  echo "Running gitleaks..."
+  gitleaks protect --staged --no-banner || exit 1
+fi
