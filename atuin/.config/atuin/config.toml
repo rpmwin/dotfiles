@@ -1,0 +1,14 @@
+## Search mode: prefix, fulltext, fuzzy, skim
+search_mode = "fuzzy"
+
+## Filter mode when searching (global = all hosts, host = this machine only)
+filter_mode = "global"
+
+## Style: auto, full, compact
+style = "compact"
+
+## Show preview of full command
+show_preview = true
+
+## Inline height (0 = fullscreen)
+inline_height = 20

@@ -1,0 +1,19 @@
+# Catppuccin Mocha for Yazi
+# Full theme: https://github.com/catppuccin/yazi
+[manager]
+cwd = { fg = "#94e2d5" }
+
+[status]
+separator_open = ""
+separator_close = ""
+
+[filetype]
+rules = [
+  { mime = "image/*", fg = "#f5c2e7" },
+  { mime = "video/*", fg = "#f9e2af" },
+  { mime = "audio/*", fg = "#f9e2af" },
+  { mime = "application/zip", fg = "#f2cdcd" },
+  { mime = "application/gzip", fg = "#f2cdcd" },
+  { mime = "application/x-tar", fg = "#f2cdcd" },
+  { name = "*/", fg = "#89b4fa", bold = true },
+]

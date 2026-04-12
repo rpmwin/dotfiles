@@ -1,0 +1,28 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Secrets
+.env
+.env.local
+.env.*.local
+.secrets
+*.pem
+*.key
+id_rsa*
+
+# Build artifacts
+*.o
+*.pyc
+__pycache__/
+node_modules/
+.terraform/

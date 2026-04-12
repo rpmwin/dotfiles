@@ -47,3 +47,16 @@ g() {
     *)    git "$@" ;;
   esac
 }
+
+# Dotfiles manager
+dots() {
+  case "$1" in
+    update) cd "$DOTFILES" && git pull && brew bundle --file="$DOTFILES/Brewfile" && "$DOTFILES/stow.sh" ;;
+    edit)   $EDITOR "$DOTFILES" ;;
+    cd)     cd "$DOTFILES" ;;
+    check)  "$DOTFILES/scripts/symlink-check.sh" ;;
+    add)    cd "$DOTFILES" && git add -A && git commit -m "${2:-update dotfiles}" && git push ;;
+    status) cd "$DOTFILES" && git status ;;
+    *)      echo "Usage: dots {update|edit|cd|check|add|status}" ;;
+  esac
+}
