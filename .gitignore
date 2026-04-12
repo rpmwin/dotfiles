@@ -1,0 +1,18 @@
+# Machine-local secrets
+zsh/.zsh/local.zsh
+.secrets
+*.key
+*.pem
+id_rsa*
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+

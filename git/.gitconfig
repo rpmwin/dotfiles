@@ -1,0 +1,12 @@
+[user]
+  name = rpmwin
+  email = rishikpuneetm@gmail.com
+
+[includeIf "gitdir:~/Developer/personal/"]
+  path = ~/.gitconfig-personal
+
+[includeIf "gitdir:~/Developer/projects/"]
+  path = ~/.gitconfig-personal
+
+[includeIf "gitdir:~/Developer/hf/"]
+  path = ~/.gitconfig-work
