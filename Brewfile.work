@@ -1,0 +1,9 @@
+# Work-only additions — brew bundle --file=Brewfile.work
+brew "argocd"
+brew "kubeseal"
+brew "sops"
+brew "hashicorp/tap/terraform"
+brew "helm"
+brew "derailed/k9s/k9s"
+cask "gcloud-cli" if OS.mac?
+cask "session-manager-plugin" if OS.mac?

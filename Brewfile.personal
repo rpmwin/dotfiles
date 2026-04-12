@@ -1,0 +1,2 @@
+# Personal-only additions — brew bundle --file=Brewfile.personal
+cask "maccy" if OS.mac?
