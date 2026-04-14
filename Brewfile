@@ -15,6 +15,7 @@ brew "fzf"
 brew "zoxide"
 brew "direnv"
 brew "atuin"
+brew "glow"
 
 # Modern CLI
 brew "bat"

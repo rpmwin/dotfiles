@@ -5,7 +5,7 @@ search_mode = "fuzzy"
 filter_mode = "global"
 
 ## Style: auto, full, compact
-style = "compact"
+style = "full"
 
 ## Show preview of full command
 show_preview = true
