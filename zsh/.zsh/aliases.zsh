@@ -10,6 +10,8 @@ alias wh='which'
 alias lg='ll | grep'
 alias path='echo $PATH | tr ":" "\n"'
 alias ez='nvim ~/.zshrc'
+alias y='yazi'
+
 
 # File & Navigation
 alias ls='eza --icons --group-directories-first'

@@ -1,3 +1,6 @@
+# Force emacs keymap (EDITOR=nvim triggers vi mode, breaks terminal keybinds)
+bindkey -e
+
 # Completion engine
 autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select
@@ -17,6 +20,12 @@ bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
 bindkey '^L' clear-screen
 
-# Word traversal (Ghostty: Alt+← / Alt+→)
-bindkey "^[[1;3D" backward-word
-bindkey "^[[1;3C" forward-word
+# Word traversal (Ghostty sends esc:b / esc:f for opt+arrow)
+bindkey "\eb" backward-word
+bindkey "\ef" forward-word
+
+# Delete word backward (opt+backspace) — Ghostty sends \x17
+bindkey "^W" backward-kill-word
+
+# Delete word forward (opt+delete)
+bindkey "\ed" kill-word

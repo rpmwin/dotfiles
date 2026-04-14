@@ -38,7 +38,7 @@ keybind = cmd+shift+right=resize_split:right,20
 # Word traversal
 keybind = opt+left=esc:b
 keybind = opt+right=esc:f
-keybind = opt+backspace=esc:ctrl+h
+keybind = opt+backspace=text:\x17
 keybind = cmd+backspace=esc:ctrl+u
 
 
