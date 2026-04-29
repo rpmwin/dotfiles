@@ -1,5 +1,7 @@
 # Oh-My-Posh prompt
-command -v oh-my-posh &>/dev/null && eval "$(oh-my-posh init zsh --config ~/.poshthemes/catppuccin_mocha.omp.json)"
+_omp="${commands[oh-my-posh]:-/opt/homebrew/bin/oh-my-posh}"
+[[ -x "$_omp" ]] && eval "$("$_omp" init zsh --config ~/.poshthemes/catppuccin_mocha.omp.json)"
+unset _omp
 
 # fzf
 if command -v fzf &>/dev/null; then

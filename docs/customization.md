@@ -61,12 +61,31 @@ ksh() {
 
 ## Adding a new brew tool
 
-1. Add to `Brewfile`: `brew "newtool"`
-2. Run `brew bundle`
-3. If it needs shell init, add to `plugins.zsh`:
+1. Add to `Brewfile`: `brew "glow"`
+2. Install: `brew bundle --file=~/dotfiles/Brewfile`
+3. If it has config files → create stow package:
+   ```bash
+   mkdir -p ~/dotfiles/glow/.config/glow
+   mv ~/.config/glow/glow.yml ~/dotfiles/glow/.config/glow/
+   cd ~/dotfiles && stow glow
+   ```
+4. If it needs shell init → add to `plugins.zsh`:
    ```bash
    command -v newtool &>/dev/null && eval "$(newtool init zsh)"
    ```
+5. If you want an alias → add to `aliases.zsh`
+6. Commit: `cd ~/dotfiles && git add -A && git commit -m "add glow"`
+
+Skip steps 3-5 if they don't apply. Most tools only need steps 1, 2, 6.
+
+### Handy brew bundle commands
+
+```bash
+brew bundle cleanup          # show installed but not in Brewfile
+brew bundle cleanup --force  # uninstall those orphans
+brew bundle check            # verify all Brewfile packages installed
+brew bundle dump             # generate Brewfile from current machine
+```
 
 ## Changing the theme
 

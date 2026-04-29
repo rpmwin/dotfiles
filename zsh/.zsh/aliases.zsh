@@ -114,6 +114,7 @@ alias tfa='terraform apply'
 
 # Cloud
 alias gcp='gcloud'
+alias awslogin='aws sso login --sso-session work && yawsso -p hf-infra hf-nonprod hf-new-nonprod hf-old-non-prod hf-new-prod'
 
 # Tmux
 alias t='tmux'
