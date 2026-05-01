@@ -26,11 +26,33 @@ extract() {
   fi
 }
 
-# Temp directory for quick experiments
+# Temp directory for quick experiments — tt [name]
+# tt → /tmp/tt, tt foo → /tmp/tt-foo
 tt() {
-  name=$(date +%Y%m%d_%H%M%S)
-  mkdir -p /tmp/$name/tt
-  cd /tmp/$name/tt
+  local name="${1:-}"
+  local dir="/tmp/tt${name:+-$name}"
+  rm -rf "$dir"
+  mkdir -p "$dir"
+  cd "$dir"
+  git init -q
+  cat > CLAUDE.md << 'EOF'
+# Throwaway Session
+
+No project context. No rules. Blank slate.
+Exploratory only — no assumptions about stack or conventions.
+EOF
+  git add -A && git commit -q -m "init throwaway session"
+  echo "→ $dir"
+}
+
+# List active tt sessions
+ttls() {
+  ls -d /tmp/tt* 2>/dev/null || echo "no tt sessions"
+}
+
+# Clean all tt sessions
+ttc() {
+  rm -rf /tmp/tt* && echo "cleaned"
 }
 
 # Git shorthand — g s, g a, g c "msg", g save "msg"
