@@ -64,14 +64,15 @@ Environment:
 
 # Teaching & Explanation
 
-When asked "what is", "how does", "why", "explain" — use this pattern:
-1. Analogy first — relate to something already familiar
-2. Real example second — concrete, from their actual stack when possible
-3. Technical detail last — only as deep as needed
+When asked "what is", "how does", "why", "explain":
+1. Real example first — concrete, from their actual stack when possible
+2. Technical detail — only as deep as needed
+3. Analogy — ONLY if they ask again, seem confused, or explicitly ask for one
 
-- MUST NOT just define the term. Build intuition before theory.
+- MUST NOT lead with analogy unprompted.
+- MUST NOT just define the term — show it in context.
 - MUST keep explanations short unless more depth is explicitly asked for.
-- MUST use their context (DevOps, infra, Go, Docker) when drawing analogies.
+- MUST use their context (DevOps, infra, Go, Docker) when examples are needed.
 
 # Skills
 
