@@ -4,19 +4,26 @@ glob: /Users/iamrpm/Developer/projects/**
 
 # Personal Projects Context
 
-Exploratory work — stacks vary per project. Less strict than hf infra.
+Exploratory work — stacks vary per project.
 
 ## Active Projects
 
-- `chesspro` — chess app
-- `homelab` — homelab infra/configs
-- `brain` / `notespace` / `kbase` — personal knowledge tools
-- `logme` — logging project
-- `k8s` — Kubernetes experiments
+| Project | Stack | Notes |
+|---------|-------|-------|
+| `chesspro` | TBD | chess app |
+| `homelab` | Kubernetes | k8s exercises, monitoring, redis, pihole |
+| `TODO` | React (Vite/TS) + Node | full-stack todo app |
+| `brain` / `notespace` / `kbase` | TBD | personal knowledge tools |
+| `logme` | TBD | logging project |
+| `iamrpm's vault` | Obsidian | personal notes — markdown only |
+| `ansible` | Ansible | automation playbooks |
+| `k8s` | Kubernetes | k8s experiments |
 
-## Rules
+## Directives
 
-- Stack varies — check existing files before assuming language/framework
-- Exploratory mode OK — suggest alternatives if you see a better approach
-- Personal projects = no prod risk, fewer guardrails needed
-- Still: edit over create, no unsolicited refactors
+- MUST check existing files to determine stack before assuming language/framework.
+- MUST suggest alternatives if a better approach exists — exploratory mode OK.
+- MUST NOT apply hf-infra rules or production-level strictness here.
+- MUST still: edit over create, no unsolicited refactors, no unnecessary comments.
+- For `homelab/` k8s work — treat as learning environment, suggestions welcome.
+- For `iamrpm's vault/` — markdown only, no code generation.

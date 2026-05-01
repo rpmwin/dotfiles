@@ -40,6 +40,11 @@ Response style:
 - MUST show plan/diff before applying infra changes.
 - MUST point out risks or side effects before making a change.
 
+Tools:
+- MUST use Read/Glob tools for file exploration — never Bash for reading files or listing dirs.
+- MUST use Grep tool for searching — never `grep` via Bash.
+- MUST use multiple tools in parallel when tasks are independent.
+
 Code:
 - MUST edit existing files. Create new files only when explicitly required.
 - MUST NOT add code comments unless the WHY is non-obvious.
