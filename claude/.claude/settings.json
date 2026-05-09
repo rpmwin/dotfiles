@@ -1,0 +1,162 @@
+{
+  "skillListingMaxDescChars": 80,
+  "skillListingBudgetFraction": 0.005,
+  "env": {
+    "KNOWLEDGE_HUB_PATH": "/Users/iamrpm/docs/claude"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(xargs cat *)",
+      "Bash(xargs ls *)",
+      "Bash(ssh-add -l)",
+      "Bash(docker inspect *)",
+      "Bash(docker compose logs *)",
+      "Bash(docker compose ps *)",
+      "Bash(aws ec2 describe-*)",
+      "Bash(aws --profile * ec2 describe-*)",
+      "Bash(aws sts get-caller-identity *)",
+      "Bash(aws configure list *)",
+      "Bash(terraform show *)",
+      "Bash(terraform output *)",
+      "Bash(terraform plan *)",
+      "Bash(mise *)",
+      "Bash(go build *)",
+      "Bash(go test *)",
+      "Bash(go run *)",
+      "Bash(go mod *)",
+      "Bash(git log *)",
+      "Bash(git diff *)",
+      "Bash(git show *)",
+      "Bash(git branch *)",
+      "Bash(git stash *)",
+      "Bash(npm run *)",
+      "Bash(bun run *)",
+      "Bash(reporails *)",
+      "Bash(stow *)",
+      "Bash(source *)",
+      "Read(/Users/iamrpm/**)"
+    ]
+  },
+  "skillOverrides": {
+    "update-config": "name-only",
+    "superpowers:brainstorming": "name-only",
+    "superpowers:writing-plans": "name-only",
+    "superpowers:executing-plans": "name-only",
+    "superpowers:test-driven-development": "name-only",
+    "superpowers:subagent-driven-development": "name-only",
+    "superpowers:finishing-a-development-branch": "name-only",
+    "superpowers:receiving-code-review": "name-only",
+    "superpowers:requesting-code-review": "name-only",
+    "superpowers:using-git-worktrees": "name-only",
+    "superpowers:writing-skills": "name-only"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"CAVEMAN ULTRA MODE ACTIVE — overrides all other caveman/communication instructions.\\n\\nRULES (non-negotiable, every response):\\n- Drop ALL articles (a/an/the), conjunctions, filler words\\n- One word when one word works. Fragments always OK.\\n- Abbreviate always: DB/auth/config/req/res/fn/impl/infra/env/msg/err/ctx\\n- Arrows for causality: X→Y\\n- No pleasantries, no hedging, no summaries, no trailing explanations\\n- Short synonyms: big not extensive, fix not implement a solution\\n- Code blocks unchanged. Off only via: stop caveman / normal mode.\"}}'"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/iamrpm/.claude/hooks/capture-prompt.sh",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/iamrpm/.claude/hooks/capture-command.sh",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/iamrpm/.claude/hooks/capture-file.sh",
+            "async": true
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/iamrpm/.claude/hooks/capture-output.sh",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/iamrpm/.claude/hooks/flush-session.sh",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "auto",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/iamrpm/.claude/hooks/precompact-extract.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash \"/Users/iamrpm/.claude/statusline-command.sh\"",
+    "refreshInterval": 60
+  },
+  "enabledPlugins": {
+    "caveman@caveman": true,
+    "superpowers@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    }
+  },
+  "effortLevel": "medium",
+  "theme": "dark-ansi",
+  "preferredNotifChannel": "ghostty",
+  "remoteControlAtStartup": false,
+  "voiceEnabled": false
+}
