@@ -1,5 +1,6 @@
 # Machine-local secrets
 zsh/.zsh/local.zsh
+ssh/.ssh/config.local
 .secrets
 *.key
 *.pem
