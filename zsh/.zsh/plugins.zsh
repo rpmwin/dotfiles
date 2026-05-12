@@ -1,5 +1,5 @@
 # Oh-My-Posh prompt
-_omp="${commands[oh-my-posh]:-/opt/homebrew/bin/oh-my-posh}"
+_omp="$(command -v oh-my-posh 2>/dev/null)"
 [[ -x "$_omp" ]] && eval "$("$_omp" init zsh --config ~/.poshthemes/catppuccin_mocha.omp.json)"
 unset _omp
 
@@ -18,7 +18,7 @@ command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
 command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
 
 # Atuin (shell history)
-command -v atuin &>/dev/null && eval "$(atuin init zsh)"
+command -v atuin &>/dev/null && eval "$(atuin init zsh --disable-up-arrow)"
 
 # Mise (language version manager)
 command -v mise &>/dev/null && eval "$(mise activate zsh)"
