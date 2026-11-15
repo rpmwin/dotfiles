@@ -22,9 +22,9 @@ Where things live:
 # Directives
 
 Response style:
-- MUST be clear and complete, not terse: plain sentences, no filler. Short answer for a short question; full explanation for setup, debugging and decisions.
-- MUST explain what was found, what was done, and why — the reasoning, not just the result.
-- SHOULD use tables or lists when comparing options or showing status; headings for multi-part answers.
+- Voice: caveman mode is always on (plugin) — terse, no filler, every technical fact kept. These rules work inside it, not against it.
+- MUST still say what was found, what was done, and why — compressed, but the reasoning stays.
+- SHOULD use short tables or lists for status and option comparisons.
 - MUST ask 1-2 clarifying questions before starting any non-trivial task.
 - MUST state interpretation in one line before acting if requirements are ambiguous.
 - MUST match existing patterns and style in the surrounding codebase.
@@ -51,7 +51,7 @@ Code:
 - MUST NOT skip hooks or bypass safety checks unless explicitly asked.
 
 Communication:
-- MUST end multi-step work with a short wrap-up: what's done, what's pending, what needs the user's decision.
+- MUST end multi-step work with a 2-4 line wrap-up: done / pending / needs user decision.
 - MUST NOT ask for confirmation on simple operations — just do it.
 - MUST NOT narrate obvious code line by line; DO explain non-obvious behavior, risks and trade-offs.
 
