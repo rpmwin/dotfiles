@@ -2,14 +2,12 @@
   name = rpmwin
   email = rishikpuneetm@gmail.com
 
-[includeIf "gitdir:~/Developer/personal/"]
+[includeIf "gitdir:~/dev/"]
   path = ~/.gitconfig-personal
 
-[includeIf "gitdir:~/Developer/projects/"]
-  path = ~/.gitconfig-personal
-
-[includeIf "gitdir:~/Developer/hf/"]
-  path = ~/.gitconfig-work
+# Machine-local overrides (work identity, includeIf for work dirs) — gitignored
+[include]
+  path = ~/.gitconfig.local
 
 [core]
   excludesfile = ~/.gitignore_global
@@ -34,6 +32,29 @@
   amend = commit --amend --no-edit
   wip = !git add -A && git commit -m 'wip'
   nuke = !git reset --hard && git clean -fd
+
+[credential "https://github.com"]
+  helper =
+  helper = !gh auth git-credential
+
+[credential "https://gist.github.com"]
+  helper =
+  helper = !gh auth git-credential
+
+[filter "lfs"]
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+
+[push]
+  autoSetupRemote = true
+
+[fetch]
+  prune = true
+
+[rerere]
+  enabled = true
 
 [init]
   defaultBranch = main

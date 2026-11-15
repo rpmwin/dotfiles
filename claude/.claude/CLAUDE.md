@@ -1,28 +1,23 @@
 # Identity
 
-Rishik Puneet. DevOps engineer at Hyperface (fintech, India). Personal projects: homelab, chess app, experiments. Email: rishik.puneet@hyperface.co.
+Rishik Puneet (GitHub: rpmwin). DevOps / infra background, India. Personal projects: homelab, trading/backtesting (Python), small tools and experiments.
+Employer-specific context lives in gitignored `~/.claude/rules/local-*.md`, never in this public file.
 
 # Directory Layout
 
 ```
 ~/.claude/
-├── CLAUDE.md                  # this file — global rules
-├── rules/
-│   ├── hf-infra.md            # Hyperface infra context (glob: ~/Developer/hf/**)
-│   ├── personal-projects.md   # personal projects (glob: ~/Developer/projects/**)
-│   └── claude-config.md       # Claude config context (glob: ~/.claude/**)
-├── settings.json              # permissions, hooks, plugins
-├── hooks/                     # shell hooks for session events
-├── skills/                    # installed skills (gstack, superpowers, caveman)
-└── memory/                    # persistent memory across sessions
+├── CLAUDE.md          # this file (symlink → ~/dotfiles/claude/.claude/CLAUDE.md)
+├── rules/             # path-scoped context (symlinked from dotfiles; local-*.md are machine-only)
+├── hooks/             # shell hooks (symlinked from dotfiles)
+├── settings.json      # real file, seeded from ~/dotfiles/claude/settings.json
+└── skills/            # installed skills
 ```
 
-Context loads by path:
-- `~/Developer/hf/**` → `rules/hf-infra.md`
-- `~/Developer/projects/**` → `rules/personal-projects.md`
-- `~/dotfiles/**` → `rules/dotfiles.md`
-- `~/docs/**` → `rules/docs.md`
-- `~/.claude/**` → `rules/claude-config.md`
+Where things live:
+- `~/dev/pro/**`, `~/dev/fun/**` → personal projects (see `rules/personal-projects.md`)
+- `~/dotfiles/**` → dotfiles repo (PUBLIC; its own CLAUDE.md applies)
+- `~/.claude/**` → Claude config (see `rules/claude-config.md`)
 
 # Directives
 
@@ -77,25 +72,12 @@ When asked "what is", "how does", "why", "explain":
 - MUST NOT lead with analogy unprompted.
 - MUST NOT just define the term — show it in context.
 - MUST keep explanations short unless more depth is explicitly asked for.
-- MUST use their context (DevOps, infra, Go, Docker) when examples are needed.
+- MUST use their context (DevOps, infra, Docker, Python, Go) when examples are needed.
 
-# Skills
+# Plugins & Skills
 
-Invoke BEFORE starting work:
+Enabled plugins: caveman, ponytail, commit-commands, security-guidance, claude-md-management, session-report, context7.
+- Library/framework docs → use context7 instead of guessing APIs.
+- Risky or security-sensitive changes → security-guidance / `/security-review`.
 
-| Task | Skill |
-|------|-------|
-| Bug / unexpected behavior | `investigate` |
-| Destructive or risky ops | `careful` or `guard` |
-| Save/resume working state | `checkpoint` |
-| Security audit | `cso` or `security-review` |
-| System/service design | `system-design` |
-| Code review before landing | `review` |
-| QA testing | `qa` |
-| Capture learning mid-session | `learn` |
-
-MUST NOT invoke `brainstorming` or `writing-plans` unless explicitly asked.
-
-# Integrations
-
-Notion MCP is available. Use it for docs, notes, and knowledge base queries when relevant.
+MUST NOT invoke brainstorming or plan-writing skills unless explicitly asked.

@@ -2,7 +2,7 @@
 # Fuzzy-find a project directory and open/attach a tmux session for it
 # Bound to Ctrl+F in tmux
 
-PROJECTS="${PROJECTS:-$HOME/Developer}"
+PROJECTS="${PROJECTS:-$HOME/dev}"
 
 # Pick a project
 selected=$(fd --type d --max-depth 2 . "$PROJECTS" | fzf --height 40% --reverse)

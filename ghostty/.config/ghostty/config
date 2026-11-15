@@ -1,20 +1,27 @@
 # Appearance
 theme = Catppuccin Mocha
 font-family = JetBrainsMono Nerd Font
+font-family-bold = JetBrainsMono Nerd Font
+font-family-italic = JetBrainsMono Nerd Font
 font-size = 14
-background-opacity = 0.95
+background-opacity = 0.75
 background-blur-radius = 20
 window-padding-x = 10
 window-padding-y = 10
+font-feature = calt
+font-feature = liga
+minimum-contrast = 1.1
 
 # Tabs & windows
 window-decoration = true
 
 # Behavior
-confirm-close-surface = false        
+confirm-close-surface = false
 mouse-hide-while-typing = true
-copy-on-select = true               
+copy-on-select = true
 scrollback-limit = 100000000
+window-save-state = always
+macos-titlebar-style = transparent
 
 # Shell
 shell-integration = zsh
@@ -23,8 +30,9 @@ shell-integration-features = cursor,sudo,title
 # Cursor
 cursor-style = bar
 cursor-style-blink = true
+cursor-color = #F5C2E7
 
-# Splits (built in, no tmux needed!)
+# Splits
 keybind = cmd+d=new_split:right
 keybind = cmd+shift+d=new_split:down
 keybind = cmd+]=goto_split:next
@@ -41,50 +49,15 @@ keybind = opt+right=esc:f
 keybind = opt+backspace=text:\x17
 keybind = cmd+backspace=esc:ctrl+u
 
-
-# Window transparency/blur
-background-opacity = 0.75
-background-blur-radius = 20
-
-# Font ligatures
-font-feature = calt
-font-feature = liga
-
-# Cursor
-cursor-style = bar
-cursor-style-blink = true
-cursor-color = #F5C2E7
-
-# URL
-
-# Bell
+# Quick terminal
+keybind = global:super+grave_accent=toggle_quick_terminal
+keybind = super+equal=increase_font_size:1
+keybind = super+minus=decrease_font_size:1
 
 # Auto update
 auto-update = check
 auto-update-channel = stable
 
-
-
-# Multiple font fallbacks
-font-family-bold = JetBrainsMono Nerd Font
-font-family-italic = JetBrainsMono Nerd Font
-
-# Minimum contrast for readability
-minimum-contrast = 1.1
-
-# Focus follows mouse (useful with splits)
-focus-follows-mouse = false
-
-# Quick terminal (like a dropdown)
-keybind = global:super+grave_accent=toggle_quick_terminal
-
-# Resize font quickly
-keybind = super+equal=increase_font_size:1
-keybind = super+minus=decrease_font_size:1
-
+# Window size
 window-width = 220
 window-height = 65
-window-save-state = always
-macos-titlebar-style = transparent
-
-# split-divider-color = #B4BEFE

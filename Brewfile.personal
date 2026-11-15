@@ -1,2 +1,29 @@
 # Personal-only additions — brew bundle --file=Brewfile.personal
-cask "maccy" if OS.mac?
+cask "visual-studio-code" if OS.mac?
+cask "brave-browser" if OS.mac?
+
+# Uncomment what you want, then: brew bundle --file=Brewfile.personal
+# cask "maccy"            # clipboard history
+# cask "rectangle"        # window snapping
+# cask "stats"            # menubar CPU/RAM/net
+# cask "alt-tab"          # windows-style alt-tab
+# cask "lulu"             # outbound firewall
+# cask "wireshark-app"
+# cask "bitwarden"        # import old Passwords.csv here, then delete the csv
+# cask "orbstack"         # lighter alternative to colima/Docker Desktop
+# cask "docker-desktop"
+# cask "postman"
+cask "google-chrome" if OS.mac?
+# cask "claude"
+# cask "obsidian"
+# cask "iina"
+# cask "the-unarchiver"
+
+# VS Code extensions (from old Mac)
+vscode "akamud.vscode-theme-onedark"
+vscode "esbenp.prettier-vscode"
+vscode "mechatroner.rainbow-csv"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "ms-python.debugpy"
+vscode "codetypess.xlsx-diff"

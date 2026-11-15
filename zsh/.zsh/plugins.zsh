@@ -11,8 +11,8 @@ if command -v fzf &>/dev/null; then
   export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --exclude .git"
 fi
 
-# Zoxide (smart cd)
-command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
+# Zoxide (smart cd) — `cd` itself is zoxide-powered, like the old Mac
+command -v zoxide &>/dev/null && eval "$(zoxide init zsh --cmd cd)"
 
 # Direnv
 command -v direnv &>/dev/null && eval "$(direnv hook zsh)"

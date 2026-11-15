@@ -1,5 +1,6 @@
 ---
-glob: /Users/iamrpm/.claude/**
+paths:
+  - "~/.claude/**"
 ---
 
 # Claude Config Context

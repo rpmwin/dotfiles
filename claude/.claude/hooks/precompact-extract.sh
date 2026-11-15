@@ -1,8 +1,9 @@
 #!/bin/bash
 # PreCompact hook — injects knowledge extraction instructions into compaction context
-DOCS_PATH="${KNOWLEDGE_HUB_PATH:-/Users/iamrpm/docs/claude}"
+DOCS_PATH="${KNOWLEDGE_HUB_PATH:-$HOME/docs/claude}"
 
 # Find the most recent unprocessed inbox file
+# shellcheck disable=SC2012  # need mtime sort; inbox filenames are our own
 LATEST_INBOX=$(ls -t "$DOCS_PATH/inbox/"*.md 2>/dev/null | head -1)
 
 if [ -z "$LATEST_INBOX" ]; then

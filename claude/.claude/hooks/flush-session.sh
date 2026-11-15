@@ -7,7 +7,7 @@ TEMP_FILE="/tmp/claude-hub-${SESSION_ID}.jsonl"
 # Nothing captured this session — skip
 [ ! -f "$TEMP_FILE" ] && exit 0
 
-DOCS_PATH="${KNOWLEDGE_HUB_PATH:-/Users/iamrpm/docs/claude}"
+DOCS_PATH="${KNOWLEDGE_HUB_PATH:-$HOME/docs/claude}"
 INBOX_DIR="$DOCS_PATH/inbox"
 mkdir -p "$INBOX_DIR"
 

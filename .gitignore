@@ -1,6 +1,9 @@
 # Machine-local secrets
 zsh/.zsh/local.zsh
 ssh/.ssh/config.local
+git/.gitconfig.local
+git/.gitconfig-work
+claude/.claude/rules/local-*.md
 .secrets
 *.key
 *.pem
@@ -17,3 +20,4 @@ Thumbs.db
 .idea/
 .vscode/
 
+homebrew/.config/homebrew/*.lock

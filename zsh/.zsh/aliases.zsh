@@ -114,7 +114,7 @@ alias tfa='terraform apply'
 
 # Cloud
 alias gcp='gcloud'
-alias awslogin='aws sso login --sso-session work && yawsso -p hf-infra hf-nonprod hf-new-nonprod hf-old-non-prod hf-new-prod'
+# (work cloud logins live in ~/.zsh/local.zsh)
 
 # Tmux
 alias t='tmux'
@@ -122,8 +122,15 @@ alias ta='tmux attach -t'
 alias tls='tmux ls'
 alias tn='tmux new -s'
 
-# Claude Code
+# AI agents
 alias cc="claude"
+alias ccc="claude --continue"
+alias oc="opencode"
+
+# Misc
+alias awake="caffeinate -dimsu"      # keep Mac awake until Ctrl-C
+alias ff="fastfetch"
+alias lzd="lazydocker"
 
 # System
 alias psa='ps aux'

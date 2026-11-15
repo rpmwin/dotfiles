@@ -108,7 +108,7 @@ Three Brewfiles:
 
 install.sh prompts which to install. Or run manually: `brew bundle --file=Brewfile.work`
 
-Git identity is handled via conditional includes in `.gitconfig` — repos under `~/work/` use work email, repos under `~/Developer/` use personal email.
+Git identity is handled via conditional includes in `.gitconfig` — repos under `~/dev/` use the personal identity; work identity goes in the gitignored `~/.gitconfig.local`.
 
 ## Removing a tool config
 

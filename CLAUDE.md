@@ -1,78 +1,94 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Personal dotfiles for rpmwin, managed with GNU Stow. Source of truth for every machine — any config change made on a machine should land here and be pushed (`dots add "msg"`).
 
-## Bootstrap & Setup
+**This repo is PUBLIC** (github.com/rpmwin/dotfiles). Never commit secrets, private keys, tokens, work/employer details, internal hostnames or IPs. Those go in the gitignored local files listed below.
+
+## Bootstrap a new machine
 
 ```bash
-# Full setup on a new machine
-./install.sh
-
-# Re-stow all packages (safe to re-run)
-./stow.sh
-
-# First-time stow (adopt existing files into repo)
-./stow.sh --adopt
+git clone https://github.com/rpmwin/dotfiles.git ~/dotfiles
+cd ~/dotfiles && ./install.sh   # brew → Brewfile(s) → backup → stow → macOS defaults
 ```
 
-After `--adopt`, run `git diff` — stow may have pulled in local changes that differ from the repo.
+Re-stow (safe to re-run): `./stow.sh`. First time on a machine with existing files: `./stow.sh --adopt`, then `git diff` to review what got pulled in.
 
-## Day-to-day Commands
+## Day-to-day
 
 ```bash
 dots update    # git pull + brew bundle + re-stow
-dots check     # verify all symlinks point into dotfiles
+dots check     # verify symlinks point into ~/dotfiles
 dots add "msg" # git add -A + commit + push
-dots edit      # open dotfiles in $EDITOR
+dots edit      # open repo in $EDITOR
+dots status    # git status of the repo
 ```
 
-## How Stow Works
+Installed a new tool? Add it to the right Brewfile in the same change.
 
-Each top-level directory (except `scripts/`, `hooks/`, `docs/`, `.github/`, `.claude/`) is a stow package. Stow symlinks its contents into `$HOME`, preserving directory structure:
+## Layout
 
-```
-dotfiles/zsh/.zshrc       →  ~/.zshrc
-dotfiles/git/.gitconfig   →  ~/.gitconfig
-dotfiles/nvim/.config/nvim/  →  ~/.config/nvim/
-```
+Every top-level dir except `scripts/ hooks/ docs/ .github/` is a stow package, symlinked into `$HOME`:
 
-Editing files in `~` edits them in the repo directly — they're already symlinks.
+| Package | Lands at |
+|---|---|
+| `zsh/` | `~/.zshrc`, `~/.zshenv`, `~/.zlogin`, `~/.zsh/*.zsh` |
+| `git/` | `~/.gitconfig`, `~/.gitconfig-personal`, `~/.gitignore_global` |
+| `ghostty/` `bat/` `btop/` `lazygit/` `yazi/` `atuin/` `mise/` `nvim/` | `~/.config/<tool>/` |
+| `tmux/` | `~/.tmux.conf` (plugins via TPM in `~/.tmux/plugins`) |
+| `posh/` | `~/.poshthemes/` (oh-my-posh Catppuccin Mocha) |
+| `ssh/` | `~/.ssh/config` (no keys, ever) |
+| `claude/` | `~/.claude/CLAUDE.md`, `~/.claude/rules/`, `~/.claude/hooks/` |
 
-## zsh Config Architecture
+`claude/settings.json` sits *outside* `.claude/` on purpose: Claude Code rewrites `~/.claude/settings.json` itself, so it is a template that `install.sh` copies in only when missing. Sync changes back by hand.
 
-`.zshrc` is a thin sourcer. Load order:
+## Brewfiles
 
-1. `.zshenv` — sets `$DOTFILES`, `$BREW_PREFIX`, `$PATH`, `$EDITOR`
+- `Brewfile` — everything every machine gets (CLI, shell, dev, containers, fonts, Ghostty)
+- `Brewfile.personal` — GUI apps + VS Code extensions; optional apps are commented out
+- `Brewfile.work` — work-only DevOps tools (terraform, helm, k9s, gcloud…)
+
+Brewfile syntax is `brew "x"` / `cask "x"` / `tap "x"` / `vscode "x"` — never `brew install "x"`.
+
+## zsh load order
+
+`.zshrc` is a thin sourcer:
+
+1. `.zshenv` — `$DOTFILES`, `$PROJECTS` (`~/dev`), brew shellenv, `$BREW_PREFIX`, `$PATH`, `$EDITOR`
 2. `.zsh/exports.zsh` — history, shell options
-3. `.zsh/completions.zsh` — tab completion, keybindings
+3. `.zsh/completions.zsh` — completion, keybindings
 4. `.zsh/aliases.zsh` — all aliases
-5. `.zsh/functions.zsh` — shell functions (`dots`, `g`, `tt`, etc.)
-6. `.zsh/plugins.zsh` — oh-my-posh, fzf, zoxide, atuin, mise, direnv
-7. `.zsh/macos.zsh` or `.zsh/linux.zsh` — OS-gated
-8. `~/.zsh/local.zsh` — machine-local overrides, secrets (gitignored, not in repo)
+5. `.zsh/functions.zsh` — `mkcd killport extract tt ttls ttc g dots`
+6. `.zsh/plugins.zsh` — oh-my-posh, fzf, zoxide, direnv, atuin, mise, autosuggestions, syntax-highlighting (last)
+7. `.zsh/macos.zsh` / `.zsh/linux.zsh` — OS-gated
+8. `~/.zsh/local.zsh` — machine-local overrides + secrets (gitignored)
 
-New aliases → `aliases.zsh`. New functions → `functions.zsh`. OS-specific → the right platform file.
+New alias → `aliases.zsh`. New function → `functions.zsh`. OS-specific → platform file. Check an alias/function doesn't already exist before adding one.
 
-## Cross-Platform
+## Machine-local (gitignored) files
 
-Both macOS and Linux are supported. `$BREW_PREFIX` is set in `.zshenv` and differs by OS. Brewfile uses `if OS.mac?` guards for macOS-only casks. Shell config uses `uname` guards to source the right platform file.
+| File | Use |
+|---|---|
+| `~/.zsh/local.zsh` | secrets, API keys, work aliases, machine-only PATH |
+| `~/.gitconfig.local` | work identity + `includeIf` for work dirs |
+| `~/.ssh/config.local` | private hosts (servers, work GitHub accounts) |
+| `~/.claude/rules/local-*.md` | employer/project-specific Claude rules |
 
-## Git Config
+## Git identity
 
-Conditional includes split work vs personal identity:
+`~/.gitconfig` defaults to personal (rpmwin). Repos under `~/dev/` include `~/.gitconfig-personal`. Work identity is added per machine in `~/.gitconfig.local`.
 
-```
-~/.gitconfig → includes ~/.gitconfig-work or ~/.gitconfig-personal based on directory path
-```
+## Projects
 
-## Pre-commit Hooks
+Projects live in `~/dev` (`~/dev/pro`, `~/dev/fun`). `$PROJECTS` drives the tmux sessionizer (`prefix f`).
 
-Activated via `git config core.hooksPath hooks/` (run by `install.sh`). Hooks run:
-- `shellcheck` on staged `.sh`/`.bash` files
-- `gitleaks protect --staged` to block secret commits
+## Safety
 
-## CI
+- Pre-commit hook (`git config core.hooksPath hooks/`, set by `install.sh`) runs `shellcheck` on staged shell scripts and `gitleaks protect --staged`.
+- CI (GitHub Actions, macOS + Ubuntu): stow `--simulate` for every package + shellcheck.
 
-GitHub Actions runs on `macos-latest` and `ubuntu-latest`:
-- Stow dry-run (`--simulate`) for all packages
-- `shellcheck` on `install.sh`, `stow.sh`, `macos.sh`, `scripts/*.sh`
+## Editing rules for Claude
+
+- Test shell changes with `zsh -i -c exit` (and `source ~/.zshrc`) before calling it done.
+- Don't break stow symlinks — edit files in the repo (or via their `~` symlink), never replace the symlink with a copy.
+- Prefer POSIX-ish shell unless a zsh feature is intentional.
+- Don't commit or push unless asked.

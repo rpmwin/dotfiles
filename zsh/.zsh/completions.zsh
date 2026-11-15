@@ -2,6 +2,9 @@
 bindkey -e
 
 # Completion engine
+# Extra completions: brew zsh-completions + docker
+[[ -n "$BREW_PREFIX" ]] && fpath=("$BREW_PREFIX/share/zsh-completions" $fpath)
+[[ -d "$HOME/.docker/completions" ]] && fpath=("$HOME/.docker/completions" $fpath)
 autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select
 
