@@ -25,3 +25,6 @@ export BREW_PREFIX="$(brew --prefix 2>/dev/null)"
 # PATH
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$HOME/.local/bin:$BUN_INSTALL/bin:$HOME/.opencode/bin:$HOME/go/bin:$PATH"
+
+# Telemetry opt-outs (apps started from a shell, e.g. Ovis via herdr)
+export OVIS_TELEMETRY=0
