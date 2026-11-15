@@ -91,4 +91,4 @@ Projects live in `~/dev` (`~/dev/pro`, `~/dev/fun`). `$PROJECTS` drives the tmux
 - Test shell changes with `zsh -i -c exit` (and `source ~/.zshrc`) before calling it done.
 - Don't break stow symlinks — edit files in the repo (or via their `~` symlink), never replace the symlink with a copy.
 - Prefer POSIX-ish shell unless a zsh feature is intentional.
-- Don't commit or push unless asked.
+- Commit each logical change (specific paths, conventional subject); push only when asked.

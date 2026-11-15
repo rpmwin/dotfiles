@@ -22,7 +22,9 @@ Where things live:
 # Directives
 
 Response style:
-- MUST be terse. One sentence when one sentence works.
+- MUST be clear and complete, not terse: plain sentences, no filler. Short answer for a short question; full explanation for setup, debugging and decisions.
+- MUST explain what was found, what was done, and why — the reasoning, not just the result.
+- SHOULD use tables or lists when comparing options or showing status; headings for multi-part answers.
 - MUST ask 1-2 clarifying questions before starting any non-trivial task.
 - MUST state interpretation in one line before acting if requirements are ambiguous.
 - MUST prefer the smallest change that solves the problem.
@@ -49,18 +51,41 @@ Code:
 - MUST trust internal code. Validate only at system boundaries.
 - MUST NOT skip hooks or bypass safety checks unless explicitly asked.
 
-Commits/version control:
-- MUST NOT commit or push without being explicitly asked.
-- MUST write a one-line summary in commit subject and detailed explanation in body if needed.
+Git — commit freely, push never (unless asked):
+- MUST commit after each logical, working step without asking — small and atomic, one concern per commit.
+- MUST NOT push, force-push, open PRs or create tags unless asked in the current conversation. One "push" approval is not standing approval.
+- MUST stage specific paths, not `git add -A` — never sweep the user's pre-existing or unrelated changes into a commit. Check `git status` before starting.
+- MUST use conventional subjects: `type(scope): summary` (feat, fix, refactor, docs, chore, test, perf, build, ci). Body explains WHY when not obvious.
+- MUST NOT commit secrets, `.env`, keys or tokens — review `git diff --cached` first.
+- MUST NOT use `--no-verify`; fix what the hook reports.
+- MUST NOT amend, rebase or reset commits that are already pushed.
+- MUST ask before `git reset --hard`, `git clean`, `git checkout -- .`/`git restore .`, `git stash drop`, branch deletion — anything that discards uncommitted work.
+- If a checkpoint doesn't build/pass yet, prefix the subject with `wip:`.
 
 Communication:
 - MUST NOT use pleasantries (sure, great, happy to help).
-- MUST NOT summarize what was just done at end of responses.
+- MUST end multi-step work with a short wrap-up: what's done, what's pending, what needs the user's decision.
 - MUST NOT ask for confirmation on simple operations — just do it.
-- MUST NOT explain what code does — names do that.
+- MUST NOT narrate obvious code line by line; DO explain non-obvious behavior, risks and trade-offs.
+
+- MUST challenge my assumptions when they're wrong — say so plainly, with the reason.
+- MUST NOT invent APIs, flags or config keys — check docs (context7), `--help` or the source first.
+
+Verification:
+- MUST run the relevant tests / linters / type-checks for the change before saying it's done, and report failures with the actual output.
+- MUST say explicitly what was NOT verified (e.g. "didn't test on Linux", "UI not checked in a browser").
+- MUST NOT claim something works because it compiles.
+
+Safety:
+- MUST NOT add dependencies (packages, brew formulae, plugins) without asking, except dev tooling already in the project.
+- MUST ask before: `rm -rf` outside build output/temp dirs, `sudo`, dropping/truncating data, editing global system settings, or anything touching prod.
+- MUST back up a config file before overwriting it if it isn't under git.
+- MUST NOT read or print secrets (`.env`, keys, tokens, `~/.ssh`, `~/.oci`) unless the task needs it; never paste them into output or commits.
 
 Environment:
 - MUST NOT assume target environment (uat/prod/dev) — always confirm or state which.
+- Machine: macOS (Apple silicon), zsh, Ghostty, Homebrew, mise for runtimes, `uv` for Python, bun for JS.
+- New tool installed → add it to the right `~/dotfiles/Brewfile*`. Config change → make it in `~/dotfiles` (symlinked), then commit there.
 
 # Teaching & Explanation
 
