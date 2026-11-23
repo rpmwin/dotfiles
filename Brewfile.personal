@@ -1,6 +1,7 @@
 # Personal-only additions — brew bundle --file=Brewfile.personal
 cask "visual-studio-code" if OS.mac?
 cask "brave-browser" if OS.mac?
+cask "tailscale-app" if OS.mac?  # second route to T3 Code from iPhone
 
 # Uncomment what you want, then: brew bundle --file=Brewfile.personal
 # cask "maccy"            # clipboard history
