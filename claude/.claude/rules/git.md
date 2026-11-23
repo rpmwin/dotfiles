@@ -2,6 +2,7 @@
 
 - MUST commit after each logical, working step without asking — small and atomic, one concern per commit.
 - MUST NOT push, force-push, open PRs or create tags unless asked in the current conversation. One "push" approval is not standing approval.
+  - Exception: repos whose origin is `github.com/rpmwin/*` — pushing a feature branch and opening a PR at the end of a task is pre-approved. Never push to the default branch, force-push or tag there either.
 - MUST stage specific paths, not `git add -A` — never sweep the user's pre-existing or unrelated changes into a commit. Check `git status` before starting.
 - MUST use conventional subjects: `type(scope): summary` (feat, fix, refactor, docs, chore, test, perf, build, ci). Body explains WHY when not obvious.
 - MUST NOT commit secrets, `.env`, keys or tokens — review `git diff --cached` first.
