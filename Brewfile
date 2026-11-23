@@ -53,6 +53,8 @@ brew "tmux"
 brew "tree-sitter"
 brew "mise"
 brew "uv"
+brew "ruff"
+brew "pyright"  # LSP for Claude Code pyright-lsp plugin
 brew "bun"
 brew "opencode"
 brew "go"
