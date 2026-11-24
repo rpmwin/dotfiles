@@ -24,8 +24,8 @@ Where things live:
 
 Read the matching file before starting that activity (not auto-loaded):
 - Browser / web page work → `~/.claude/playbooks/browser.md`
-- Desktop, simulator or emulator screenshots → `~/.claude/playbooks/desktop-screenshots.md`
-- Web research → `~/.claude/playbooks/research.md`
+- Desktop, simulator or emulator screenshots → `~/.claude/playbooks/computer-use.md`
+- Web research → `~/.claude/playbooks/web-research.md`
 
 General token rules: `~/.claude/rules/token-economy.md` (always loaded).
 
