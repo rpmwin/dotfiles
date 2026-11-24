@@ -9,13 +9,14 @@ Employer-specific context lives in gitignored `~/.claude/rules/local-*.md`, neve
 ~/.claude/
 ├── CLAUDE.md          # this file (symlink → ~/dotfiles/claude/.claude/CLAUDE.md)
 ├── rules/             # tokens, git (always); python, projects, claude_config (path-scoped); local-*.md machine-only
-├── skills/            # browser, desktop, research (on demand) + installed skills
+├── skills/            # browser, desktop, research; idea, think, decide, spec (on demand) + installed skills
 ├── hooks/             # shell hooks (symlinked from dotfiles)
 └── settings.json      # real file, seeded from ~/dotfiles/claude/settings.json
 ```
 
 Where things live:
 - `~/dev/pro/**`, `~/dev/fun/**` → personal projects (see `rules/projects.md`)
+- `~/dev/notebook` → private `rpmwin/notebook`: ideas, brainstorms and decisions not tied to a repo
 - `~/dotfiles/**` → dotfiles repo (PUBLIC; its own CLAUDE.md applies)
 - `~/.claude/**` → Claude config (see `rules/claude_config.md`)
 
@@ -92,4 +93,4 @@ Enabled plugins: caveman, ponytail, commit-commands, security-guidance, claude-m
 - Library/framework docs → use context7 instead of guessing APIs.
 - Risky or security-sensitive changes → security-guidance / `/security-review`.
 
-MUST NOT invoke brainstorming or plan-writing skills unless explicitly asked.
+MUST NOT invoke third-party brainstorming or plan-writing skills unless explicitly asked. Own skills `idea`, `think`, `decide`, `spec` are fine whenever an idea, discussion or decision comes up.
