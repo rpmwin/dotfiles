@@ -9,6 +9,7 @@ Employer-specific context lives in gitignored `~/.claude/rules/local-*.md`, neve
 ~/.claude/
 ├── CLAUDE.md          # this file (symlink → ~/dotfiles/claude/.claude/CLAUDE.md)
 ├── rules/             # path-scoped context (symlinked from dotfiles; local-*.md are machine-only)
+├── playbooks/         # per-activity rules, read on demand (symlinked from dotfiles)
 ├── hooks/             # shell hooks (symlinked from dotfiles)
 ├── settings.json      # real file, seeded from ~/dotfiles/claude/settings.json
 └── skills/            # installed skills
@@ -18,6 +19,15 @@ Where things live:
 - `~/dev/pro/**`, `~/dev/fun/**` → personal projects (see `rules/personal-projects.md`)
 - `~/dotfiles/**` → dotfiles repo (PUBLIC; its own CLAUDE.md applies)
 - `~/.claude/**` → Claude config (see `rules/claude-config.md`)
+
+# Playbooks
+
+Read the matching file before starting that activity (not auto-loaded):
+- Browser / web page work → `~/.claude/playbooks/browser.md`
+- Desktop, simulator or emulator screenshots → `~/.claude/playbooks/desktop-screenshots.md`
+- Web research → `~/.claude/playbooks/research.md`
+
+General token rules: `~/.claude/rules/token-economy.md` (always loaded).
 
 # Directives
 
