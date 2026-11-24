@@ -1,3 +1,8 @@
+# PATH — re-prepend user dirs: macOS /etc/zprofile (path_helper) runs after .zshenv
+# in login shells and pushes /usr/local/bin ahead of them
+typeset -U path
+path=("$HOME/.local/bin" "$BUN_INSTALL/bin" "$HOME/.opencode/bin" "$HOME/go/bin" $path)
+
 # History
 HISTFILE=~/.zsh_history
 HISTSIZE=20000

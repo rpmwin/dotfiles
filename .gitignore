@@ -21,3 +21,4 @@ Thumbs.db
 .vscode/
 
 homebrew/.config/homebrew/*.lock
+claude/.claude/hooks/caveman-statusline.sh

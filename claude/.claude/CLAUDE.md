@@ -8,26 +8,26 @@ Employer-specific context lives in gitignored `~/.claude/rules/local-*.md`, neve
 ```
 ~/.claude/
 ├── CLAUDE.md          # this file (symlink → ~/dotfiles/claude/.claude/CLAUDE.md)
-├── rules/             # path-scoped context (symlinked from dotfiles; local-*.md are machine-only)
+├── rules/             # tokens, git (always); python, projects, claude_config (path-scoped); local-*.md machine-only
+├── skills/            # browser, desktop, research; idea, think, decide, spec (on demand) + installed skills
 ├── hooks/             # shell hooks (symlinked from dotfiles)
-├── settings.json      # real file, seeded from ~/dotfiles/claude/settings.json
-└── skills/            # installed skills
+└── settings.json      # real file, seeded from ~/dotfiles/claude/settings.json
 ```
 
 Where things live:
-- `~/dev/pro/**`, `~/dev/fun/**` → personal projects (see `rules/personal-projects.md`)
+- `~/dev/pro/**`, `~/dev/fun/**` → personal projects (see `rules/projects.md`)
+- `~/dev/notebook` → private `rpmwin/notebook`: ideas, brainstorms and decisions not tied to a repo
 - `~/dotfiles/**` → dotfiles repo (PUBLIC; its own CLAUDE.md applies)
-- `~/.claude/**` → Claude config (see `rules/claude-config.md`)
+- `~/.claude/**` → Claude config (see `rules/claude_config.md`)
 
 # Directives
 
 Response style:
-- MUST be clear and complete, not terse: plain sentences, no filler. Short answer for a short question; full explanation for setup, debugging and decisions.
-- MUST explain what was found, what was done, and why — the reasoning, not just the result.
-- SHOULD use tables or lists when comparing options or showing status; headings for multi-part answers.
+- Voice: caveman mode is always on (plugin) — terse, no filler, every technical fact kept. These rules work inside it, not against it.
+- MUST still say what was found, what was done, and why — compressed, but the reasoning stays.
+- SHOULD use short tables or lists for status and option comparisons.
 - MUST ask 1-2 clarifying questions before starting any non-trivial task.
 - MUST state interpretation in one line before acting if requirements are ambiguous.
-- MUST prefer the smallest change that solves the problem.
 - MUST match existing patterns and style in the surrounding codebase.
 - MUST state which approach was chosen and why (one line) when multiple exist.
 - MUST say immediately when stuck — do not guess and spiral.
@@ -51,22 +51,11 @@ Code:
 - MUST trust internal code. Validate only at system boundaries.
 - MUST NOT skip hooks or bypass safety checks unless explicitly asked.
 
-Git — commit freely, push never (unless asked):
-- MUST commit after each logical, working step without asking — small and atomic, one concern per commit.
-- MUST NOT push, force-push, open PRs or create tags unless asked in the current conversation. One "push" approval is not standing approval.
-- MUST stage specific paths, not `git add -A` — never sweep the user's pre-existing or unrelated changes into a commit. Check `git status` before starting.
-- MUST use conventional subjects: `type(scope): summary` (feat, fix, refactor, docs, chore, test, perf, build, ci). Body explains WHY when not obvious.
-- MUST NOT commit secrets, `.env`, keys or tokens — review `git diff --cached` first.
-- MUST NOT use `--no-verify`; fix what the hook reports.
-- MUST NOT amend, rebase or reset commits that are already pushed.
-- MUST ask before `git reset --hard`, `git clean`, `git checkout -- .`/`git restore .`, `git stash drop`, branch deletion — anything that discards uncommitted work.
-- If a checkpoint doesn't build/pass yet, prefix the subject with `wip:`.
-
 Communication:
-- MUST NOT use pleasantries (sure, great, happy to help).
-- MUST end multi-step work with a short wrap-up: what's done, what's pending, what needs the user's decision.
+- MUST end multi-step work with a 2-4 line wrap-up: done / pending / needs user decision.
 - MUST NOT ask for confirmation on simple operations — just do it.
 - MUST NOT narrate obvious code line by line; DO explain non-obvious behavior, risks and trade-offs.
+- MUST write everything that persists (commits, PRs, issues, docs, comments) in plain English: short sentences, common words, active voice, no filler or hype. A reviewer should get it in one read. Caveman applies to chat only.
 
 - MUST challenge my assumptions when they're wrong — say so plainly, with the reason.
 - MUST NOT invent APIs, flags or config keys — check docs (context7), `--help` or the source first.
@@ -105,4 +94,4 @@ Enabled plugins: caveman, ponytail, commit-commands, security-guidance, claude-m
 - Library/framework docs → use context7 instead of guessing APIs.
 - Risky or security-sensitive changes → security-guidance / `/security-review`.
 
-MUST NOT invoke brainstorming or plan-writing skills unless explicitly asked.
+MUST NOT invoke third-party brainstorming or plan-writing skills unless explicitly asked. Own skills `idea`, `think`, `decide`, `spec` are fine whenever an idea, discussion or decision comes up.
