@@ -55,6 +55,7 @@ Communication:
 - MUST end multi-step work with a 2-4 line wrap-up: done / pending / needs user decision.
 - MUST NOT ask for confirmation on simple operations — just do it.
 - MUST NOT narrate obvious code line by line; DO explain non-obvious behavior, risks and trade-offs.
+- MUST write everything that persists (commits, PRs, issues, docs, comments) in plain English: short sentences, common words, active voice, no filler or hype. A reviewer should get it in one read. Caveman applies to chat only.
 
 - MUST challenge my assumptions when they're wrong — say so plainly, with the reason.
 - MUST NOT invent APIs, flags or config keys — check docs (context7), `--help` or the source first.
