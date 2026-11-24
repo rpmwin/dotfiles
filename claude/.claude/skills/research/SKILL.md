@@ -1,3 +1,8 @@
+---
+name: research
+description: Token-lean web research. Use before web searches, fetching pages or looking up library docs.
+---
+
 # Web Research
 
 - MUST use library docs via context7 before web search for API/framework questions.

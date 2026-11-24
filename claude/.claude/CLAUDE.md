@@ -8,26 +8,16 @@ Employer-specific context lives in gitignored `~/.claude/rules/local-*.md`, neve
 ```
 ~/.claude/
 ├── CLAUDE.md          # this file (symlink → ~/dotfiles/claude/.claude/CLAUDE.md)
-├── rules/             # path-scoped context (symlinked from dotfiles; local-*.md are machine-only)
-├── playbooks/         # per-activity rules, read on demand (symlinked from dotfiles)
+├── rules/             # tokens, git (always); python, projects, claude_config (path-scoped); local-*.md machine-only
+├── skills/            # browser, desktop, research (on demand) + installed skills
 ├── hooks/             # shell hooks (symlinked from dotfiles)
-├── settings.json      # real file, seeded from ~/dotfiles/claude/settings.json
-└── skills/            # installed skills
+└── settings.json      # real file, seeded from ~/dotfiles/claude/settings.json
 ```
 
 Where things live:
-- `~/dev/pro/**`, `~/dev/fun/**` → personal projects (see `rules/personal-projects.md`)
+- `~/dev/pro/**`, `~/dev/fun/**` → personal projects (see `rules/projects.md`)
 - `~/dotfiles/**` → dotfiles repo (PUBLIC; its own CLAUDE.md applies)
-- `~/.claude/**` → Claude config (see `rules/claude-config.md`)
-
-# Playbooks
-
-Read the matching file before starting that activity (not auto-loaded):
-- Browser / web page work → `~/.claude/playbooks/browser.md`
-- Desktop, simulator or emulator screenshots → `~/.claude/playbooks/computer-use.md`
-- Web research → `~/.claude/playbooks/web-research.md`
-
-General token rules: `~/.claude/rules/token-economy.md` (always loaded).
+- `~/.claude/**` → Claude config (see `rules/claude_config.md`)
 
 # Directives
 
@@ -37,7 +27,6 @@ Response style:
 - SHOULD use tables or lists when comparing options or showing status; headings for multi-part answers.
 - MUST ask 1-2 clarifying questions before starting any non-trivial task.
 - MUST state interpretation in one line before acting if requirements are ambiguous.
-- MUST prefer the smallest change that solves the problem.
 - MUST match existing patterns and style in the surrounding codebase.
 - MUST state which approach was chosen and why (one line) when multiple exist.
 - MUST say immediately when stuck — do not guess and spiral.
@@ -61,19 +50,7 @@ Code:
 - MUST trust internal code. Validate only at system boundaries.
 - MUST NOT skip hooks or bypass safety checks unless explicitly asked.
 
-Git — commit freely, push never (unless asked):
-- MUST commit after each logical, working step without asking — small and atomic, one concern per commit.
-- MUST NOT push, force-push, open PRs or create tags unless asked in the current conversation. One "push" approval is not standing approval.
-- MUST stage specific paths, not `git add -A` — never sweep the user's pre-existing or unrelated changes into a commit. Check `git status` before starting.
-- MUST use conventional subjects: `type(scope): summary` (feat, fix, refactor, docs, chore, test, perf, build, ci). Body explains WHY when not obvious.
-- MUST NOT commit secrets, `.env`, keys or tokens — review `git diff --cached` first.
-- MUST NOT use `--no-verify`; fix what the hook reports.
-- MUST NOT amend, rebase or reset commits that are already pushed.
-- MUST ask before `git reset --hard`, `git clean`, `git checkout -- .`/`git restore .`, `git stash drop`, branch deletion — anything that discards uncommitted work.
-- If a checkpoint doesn't build/pass yet, prefix the subject with `wip:`.
-
 Communication:
-- MUST NOT use pleasantries (sure, great, happy to help).
 - MUST end multi-step work with a short wrap-up: what's done, what's pending, what needs the user's decision.
 - MUST NOT ask for confirmation on simple operations — just do it.
 - MUST NOT narrate obvious code line by line; DO explain non-obvious behavior, risks and trade-offs.

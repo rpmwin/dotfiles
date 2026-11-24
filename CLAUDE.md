@@ -37,7 +37,7 @@ Every top-level dir except `scripts/ hooks/ docs/ .github/` is a stow package, s
 | `tmux/` | `~/.tmux.conf` (plugins via TPM in `~/.tmux/plugins`) |
 | `posh/` | `~/.poshthemes/` (oh-my-posh Catppuccin Mocha) |
 | `ssh/` | `~/.ssh/config` (no keys, ever) |
-| `claude/` | `~/.claude/CLAUDE.md`, `~/.claude/rules/`, `~/.claude/playbooks/`, `~/.claude/hooks/` |
+| `claude/` | `~/.claude/CLAUDE.md`, `~/.claude/rules/`, `~/.claude/skills/<name>/`, `~/.claude/hooks/` |
 
 `claude/settings.json` sits *outside* `.claude/` on purpose: Claude Code rewrites `~/.claude/settings.json` itself, so it is a template that `install.sh` copies in only when missing. Sync changes back by hand.
 

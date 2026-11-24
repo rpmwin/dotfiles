@@ -1,3 +1,8 @@
+---
+name: browser
+description: Token-lean browser automation. Use before any web page work with Claude in Chrome, Playwright or preview tools: reading page text, clicking, screenshots, canvas/Flutter apps.
+---
+
 # Browser Automation (Claude in Chrome, Playwright, preview)
 
 Screenshots are the most expensive way to see a page. Escalate cheapest-first and stop at the first step that works.

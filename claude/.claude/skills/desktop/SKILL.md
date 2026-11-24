@@ -1,3 +1,8 @@
+---
+name: desktop
+description: Token-lean desktop and device work. Use before computer use, iOS Simulator or Android Emulator tasks that involve screenshots or UI input.
+---
+
 # Desktop / Device Screenshots (computer use, iOS Simulator, Android Emulator)
 
 Each full screenshot costs ~1-2k tokens and stays in context for the rest of the session.
